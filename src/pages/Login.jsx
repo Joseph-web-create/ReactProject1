@@ -11,7 +11,7 @@ export const Login = () => {
             <input
               type="text"
               placeholder="Username"
-              className="input input-md"
+              className="input input-lg"
             />
           </label>
           <label className="floating-label">
@@ -19,9 +19,10 @@ export const Login = () => {
             <input
               type="password"
               placeholder="Password"
-              className="input input-md"
+              className="input input-lg"
             />
           </label>
+          <button className="btn btn-secondary w-full">Continue</button>
         </form>
       </div>
     </div>
