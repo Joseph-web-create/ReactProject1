@@ -1,11 +1,11 @@
-import { useFoam } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { error, isSubmitting },
-  } = useFoam();
+  } = useForm();
 
   return (
     <div>
