@@ -1,6 +1,12 @@
-import React from "react";
+import { useFoam } from "react-hook-form";
 
 export const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { error, isSubmitting },
+  } = useFoam();
+
   return (
     <div>
       <div className="w-full md:max-w-[320px] mx-auto">
