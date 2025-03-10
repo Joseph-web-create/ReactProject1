@@ -10,10 +10,10 @@ export const validateUserName = (username) => {
 };
 
 export const validatePassword = (password) => {
-  const validRegex = /^(?=.[a-z])(?=.[A-Z]).{5,}$/;
+  const validRegex = /^(?=.*[a-z])(?=.*[A-Z]).{5}$/;
   if (!password) {
     return "Please enter a password";
-  } else if (validRegex.test(validRegex)) {
+  } else if (validRegex.test(password)) {
     return "Password must contain at least one lowerCase, uppercase amd must be at leats 5 character long";
   }
 };
