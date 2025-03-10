@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { validateUserName, validatePassword } from "../utils/formValidate";
+import { loginUser } from "../api/auth";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const {
@@ -7,8 +9,15 @@ export const Login = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-  const submitForm = (data) => {
-    console.log(data);
+  const submitForm = async (formData) => {
+    try {
+      const { data, status } = await loginUser(formData);
+      if (status === 200) {
+        toast.success(`Welcome ${data.firstName}`,{toastId:'loginSuccess'})
+      }
+    } catch (error) {
+      toast.error(error.response.data.message,{toastId:'errorLogin'})
+    }
   };
   return (
     <div>
@@ -54,8 +63,16 @@ export const Login = () => {
               </span>
             )}
           </div>
-          <button className="btn btn-secondary w-full" type="submit">
-            Continue
+          <button
+            className="btn btn-secondary w-full"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : (
+              "continue"
+            )}
           </button>
         </form>
       </div>

@@ -10,7 +10,7 @@ export const validateUserName = (username) => {
 };
 
 export const validatePassword = (password) => {
-  const validRegex = /^(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+  const validRegex = /^(?=.*[a-z]).{5,}$/;
   if (!password) {
     return "Please enter a password";
   } 
