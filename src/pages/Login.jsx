@@ -2,21 +2,39 @@ import { useForm } from "react-hook-form";
 import { validateUserName, validatePassword } from "../utils/formValidate";
 import { loginUser } from "../api/auth";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import { useState } from "react";
 
 export const Login = () => {
+  const [revealPassword, setRevealPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+  const navigate = useNavigate();
+
+  const togglePassword=()=>{
+    setRevealPassword(prev => !prev)
+  }
+
   const submitForm = async (formData) => {
     try {
       const { data, status } = await loginUser(formData);
       if (status === 200) {
-        toast.success(`Welcome ${data.firstName}`,{toastId:'loginSuccess'})
+        toast.success(`Welcome ${data.firstName}`, { toastId: "loginSuccess" });
+        localStorage.setItem(
+          "userAccessToken",
+          JSON.stringify(data.accessToken)
+        );
+        localStorage.setItem(
+          "userRefreshToken",
+          JSON.stringify(data.refreshToken)
+        );
+        navigate("/");
       }
     } catch (error) {
-      toast.error(error.response.data.message,{toastId:'errorLogin'})
+      toast.error(error.response.data.message, { toastId: "errorLogin" });
     }
   };
   return (
@@ -44,11 +62,11 @@ export const Login = () => {
             )}
           </div>
 
-          <div>
+          <div className="relative">
             <label className="floating-label">
               <span>PassWord</span>
               <input
-                type="password"
+                type={revealPassword ? "text" : "password"}
                 placeholder="Password"
                 className="input input-lg"
                 id="password"
@@ -57,14 +75,25 @@ export const Login = () => {
                 })}
               />
             </label>
-            {errors.password && (
-              <span className="text-sm text-red-600">
-                {errors.password.message}
-              </span>
-            )}
+            <button
+              className="absolute inset-y-0 right-2"
+              onClick={togglePassword}
+              type="button"
+            >
+              {revealPassword ? (
+                <i className="ri-eye-line"></i>
+              ) : (
+                <i className="ri-eye-off-line"></i>
+              )}
+            </button>
           </div>
+          {errors.password && (
+            <span className="text-sm text-red-600">
+              {errors.password.message}
+            </span>
+          )}
           <button
-            className="btn btn-secondary w-full"
+            className="mt-4 btn btn-secondary w-full"
             type="submit"
             disabled={isSubmitting}
           >
