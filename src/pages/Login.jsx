@@ -4,6 +4,7 @@ import { loginUser } from "../api/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { useAuth } from "../store";
 
 export const Login = () => {
   const [revealPassword, setRevealPassword] = useState(false);
@@ -14,23 +15,18 @@ export const Login = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const togglePassword=()=>{
-    setRevealPassword(prev => !prev)
-  }
+  const { setUserToken, setRefreshToken } = useAuth();
+  const togglePassword = () => {
+    setRevealPassword((prev) => !prev);
+  };
 
   const submitForm = async (formData) => {
     try {
       const { data, status } = await loginUser(formData);
       if (status === 200) {
         toast.success(`Welcome ${data.firstName}`, { toastId: "loginSuccess" });
-        localStorage.setItem(
-          "userAccessToken",
-          JSON.stringify(data.accessToken)
-        );
-        localStorage.setItem(
-          "userRefreshToken",
-          JSON.stringify(data.refreshToken)
-        );
+        setUserToken(data.accessToken);
+        setRefreshToken(data.refreshToken);
         navigate("/");
       }
     } catch (error) {

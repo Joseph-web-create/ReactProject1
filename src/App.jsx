@@ -1,6 +1,6 @@
 import { AppRoutes } from "./routes/AppRoutes";
 import { ToastContainer } from "react-toastify";
-import AuthProvider from "./store/authProvider";
+import AuthProvider from "./store/AuthProvider";
 
 function App() {
   return (

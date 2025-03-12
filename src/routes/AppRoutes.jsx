@@ -1,25 +1,40 @@
-import React, { Children } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { AuthLayout } from "../layout/AuthLayout";
 import Home from "../pages/Home";
 import { Login } from "../pages/Login";
 import RootLayout from "../layout/RootLayout";
 import { useAuth } from "../store";
+import Spinner from "../component/Spinner";
+import { PrivateRoutes, PublicRoutes } from "./ProtectedRoutes";
 
 export const AppRoutes = () => {
   const { isCheckingAuth, user } = useAuth();
+  console.log(user.isAuthenticated);
+  
   if (isCheckingAuth) {
-    return
+    return (
+      <>
+        <Spinner />
+      </>
+    );
   }
 
   const routes = [
     {
-      element: <AuthLayout />,
+      element: (
+        <PublicRoutes isAuthenticated={user.isAuthenticated}>
+          <AuthLayout />
+        </PublicRoutes>
+      ),
       children: [{ path: "login", element: <Login /> }],
     },
     {
       path: "/",
-      element: <RootLayout />,
+      element: (
+        <PrivateRoutes isAuthenticated={user.isAuthenticated}>
+          <RootLayout />
+        </PrivateRoutes>
+      ),
       children: [
         {
           index: true,
