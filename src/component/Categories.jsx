@@ -19,7 +19,7 @@ export const Categories = () => {
         const res = await getProductsCategories();
         console.log(res);
         if (res.status === 200) {
-          const random = getProductsCategories(res.data, 8);
+          const random = getRandomCategories(res.data, 5);
           setData(random);
         }
       } catch (error) {
@@ -36,13 +36,13 @@ export const Categories = () => {
   return (
     <div className="border-t border-b">
       <div className="container max-auto px-4 py-6">
-        {data?.map((item, index) => (
-          <div>
-            <NavLink key={index} className="uppercase mr-4">
+        <div className="flex justify-center gap-5">
+          {data?.map((item, index) => (
+            <NavLink key={index} className="uppercase">
               {item}
             </NavLink>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
