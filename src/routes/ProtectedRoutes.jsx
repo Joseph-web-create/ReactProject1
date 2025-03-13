@@ -5,7 +5,9 @@ export function PrivateRoutes({ children, isAuthenticated }) {
   if (!isAuthenticated) {
     <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
+
   return children;
+  
 }
 
 export function PublicRoutes({ children, isAuthenticated }) {
@@ -13,5 +15,7 @@ export function PublicRoutes({ children, isAuthenticated }) {
   if (isAuthenticated) {
     <Navigate to="/" state={{ from: location.pathname }} replace />;
   }
+
   return children;
+  
 }

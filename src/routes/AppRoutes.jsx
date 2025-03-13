@@ -9,7 +9,7 @@ import { PrivateRoutes, PublicRoutes } from "./ProtectedRoutes";
 
 export const AppRoutes = () => {
   const { isCheckingAuth, user } = useAuth();
-  console.log(user.isAuthenticated);
+  console.log(isCheckingAuth);
   
   if (isCheckingAuth) {
     return (
@@ -22,7 +22,7 @@ export const AppRoutes = () => {
   const routes = [
     {
       element: (
-        <PublicRoutes isAuthenticated={user.isAuthenticated}>
+        <PublicRoutes isAuthenticate={user.isAuthenticated}>
           <AuthLayout />
         </PublicRoutes>
       ),
@@ -31,7 +31,7 @@ export const AppRoutes = () => {
     {
       path: "/",
       element: (
-        <PrivateRoutes isAuthenticated={user.isAuthenticated}>
+        <PrivateRoutes isAuthenticate={user.isAuthenticated}>
           <RootLayout />
         </PrivateRoutes>
       ),

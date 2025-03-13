@@ -22,7 +22,7 @@ const Home = () => {
     };
     fetchData()
   }, []);
-  return <div></div>;
+  
 };
 
 export default Home;

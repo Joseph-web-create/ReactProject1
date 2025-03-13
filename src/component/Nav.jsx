@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { useAuth } from "../store";
 
 export default function Nav() {
-     const {user} = useAuth()
+     const {user, handleLogout} = useAuth()
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center">
@@ -13,9 +13,19 @@ export default function Nav() {
         <div className="flex gap-4 items-center">
           {user?.isAuthenticated ? (
             <>
-              <details className="dropdown">
-                <summary className="btn m-1">{`Hoe ${user?.data?.firstName}`}</summary>
-                <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              {/* <details className="dropdown">
+                <summary className="btn m-1"></summary>
+                <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"></ul>
+              </details> */}
+
+              <div className="dropdown">
+                <div tabIndex={0} role="button" className="btn m-1">
+                  {`Hoe ${user?.data?.firstName}`}
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
                   <li>
                     <NavLink to="/profile">Profile</NavLink>
                   </li>
@@ -23,10 +33,10 @@ export default function Nav() {
                     <NavLink to="/order">Orders</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/order">Logout</NavLink>
+                    <a onClick={handleLogout}>Logout</a>
                   </li>
                 </ul>
-              </details>
+              </div>
             </>
           ) : (
             <NavLink to="/login">
