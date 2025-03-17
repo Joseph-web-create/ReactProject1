@@ -28,10 +28,14 @@ export const Login = () => {
         setUserToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/");
+
       }
+      console.log("Form input needed", formData);
     } catch (error) {
       toast.error(error.response.data.message, { toastId: "errorLogin" });
     }
+    
+    
   };
   return (
     <div>
