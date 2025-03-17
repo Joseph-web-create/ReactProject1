@@ -8,8 +8,8 @@ export default function TopRated({ products }) {
   const scroll = (direction) => {
     const { current } = scrollRef;
     direction === "left"
-      ? (current.scrollLeft -= 400)
-      : (current.scrollLeft += 400);
+      ? (current.scrollLeft -= 600)
+      : (current.scrollLeft += 600);
   };
   return (
     <div className="bg-gray-200  py-6 px-4">
