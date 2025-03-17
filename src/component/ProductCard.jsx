@@ -10,6 +10,10 @@ export default function ProductCard({ item }) {
             className="mx-auto h-[200px] py-6 object-contain w-full"
           />
         </div>
+        <div className="py-4">
+          <h3 className="text-sm font-medium line-clamp-2 mb-2">{item.title}</h3>
+          <p className="text-lg font-bold">${item.price}</p>
+        </div>
       </Link>
     </div>
   );
