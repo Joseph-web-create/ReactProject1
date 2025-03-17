@@ -1,17 +1,23 @@
 import ProductCard from "./ProductCard";
+import { useRef } from "react";
 
 export default function TopRated({ products }) {
-  console.log(products);
+  const scrollRef = useRef();
   const getTopratedProducts = products?.filter((item) => item.rating > 4);
-  console.log(getTopratedProducts);
 
+  const scroll = (direction) => {
+    const { current } = scrollRef;
+    direction === "left"
+      ? (current.scrollLeft -= 400)
+      : (current.scrollLeft += 400);
+  };
   return (
     <div className="bg-gray-200  py-6 px-4">
       <div className="container mx-auto mt-16 relative">
         <h1 className="font-semibold text-xl text-center">
           Top Rated Products
         </h1>
-        <div className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scroll-track-gray-100">
+        <div className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scroll-track-gray-100" ref={scrollRef}>
           {getTopratedProducts.map((items) => (
             <ProductCard key={items.id} item={items} />
           ))}
