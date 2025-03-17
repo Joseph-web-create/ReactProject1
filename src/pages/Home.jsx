@@ -6,6 +6,7 @@ import TopRated from "../component/TopRated";
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [products, setProducts] = useState([])
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [lastSelected, setLastSelected] = useLocalStorage("lastSelected", null);
@@ -31,13 +32,15 @@ const Home = () => {
               Math.random() * res?.data.products.length
             );
             setData([res.data.products[randomProductIndex]]);
+            
             setLastSelected(randomProductIndex);
             setlastTimeStamp(now);
           } else {
             setData([res.data.products[lastSelected]]);
           }
+          setProducts(res.data.products);
         }
-        console.log("Dubble");
+        
       } catch (error) {
         console.log(error);
       } finally {
@@ -76,7 +79,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <TopRated />
+      <TopRated products={products}/>
     </>
   );
 };
