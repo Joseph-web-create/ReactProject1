@@ -17,7 +17,7 @@ export const Categories = () => {
       setLoading(true);
       try {
         const res = await getProductsCategories();
-        
+
         if (res.status === 200) {
           const random = getRandomCategories(res.data, 8);
           setData(random);
@@ -33,7 +33,7 @@ export const Categories = () => {
   }, []);
 
   return (
-    <div className="border-t border-b">
+    <div className="hidden md:block border-t border-b">
       <div className="container max-auto px-4 py-6">
         {error && <p className="text-center text-red-500">{error}</p>}
         {loading ? (
@@ -41,12 +41,12 @@ export const Categories = () => {
         ) : (
           <>
             {data?.length > 0 ? (
-              <div className="flex justify-center gap-5">
+              <div className="flex justify-center items-center gap-5">
                 {data?.map((item, index) => (
                   <NavLink
                     key={index}
                     className={({ isActive }) =>
-                      `uppercase hover:text-primary ${
+                      `uppercase hover:text-primary text-sm ${
                         isActive ? "text-zinc-700 font-bold" : ""
                       }`
                     }
@@ -57,9 +57,7 @@ export const Categories = () => {
                 ))}
               </div>
             ) : (
-              <p className="text-center">
-                No Category items to display
-              </p>
+              <p className="text-center">No Category items to display</p>
             )}
           </>
         )}

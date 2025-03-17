@@ -20,7 +20,7 @@ export default function Nav() {
 
               <div className="dropdown">
                 <div tabIndex={0} role="button" className="btn m-1">
-                  {`Hoe ${user?.data?.firstName}`}
+                  {`Hi ${user?.data?.firstName}`}
                 </div>
                 <ul
                   tabIndex={0}

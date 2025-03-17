@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../api/auth";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import { Link } from "react-router";
+import TopRated from "../component/TopRated";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -48,31 +49,35 @@ const Home = () => {
 
   console.log(data);
   return (
-    <div className="relative">
-      <div className="bg-black/50 absolute h-full w-full"></div>
-      {data?.map((item) => (
-        <div key={item.id} className="h-[calc(80vh)] w-full">
-          <img
-            src={item.images[0]}
-            className="h-full w-full aspect-square object-contain"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-30">
-            <h1 className="text-4xl md:text-7xl font-bold">
-              Product of the day
-            </h1>
-            <h1 className=" mt-4 font-bold text-3xl md:text-5xl text-center">
-              {item.title}
-            </h1>
-            <Link
-              to={`/product/${item.id}`}
-              className="mt-4 uppercase border p-3 border-white text-white font-bold w-[200px] text-center"
-            >
-              View product
-            </Link>
+    <>
+      <div className="relative">
+        {data?.map((item) => (
+          <div key={item.id} className="h-[calc(80vh)] w-full">
+            <img
+              src={item.images[0]}
+              className="h-full w-full aspect-square object-contain"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-30">
+              <div className="bg-black/30 w-[1000px] h-[400px] flex flex-col items-center justify-center text-zinc-200">
+                <h1 className="text-4xl md:text-7xl font-bold">
+                  Product of the day
+                </h1>
+                <h1 className=" mt-4 font-bold text-3xl md:text-4xl text-center">
+                  {item.title}
+                </h1>
+                <Link
+                  to={`/product/${item.id}`}
+                  className="mt-4 uppercase border-2 p-3 border-white text-white font-bold w-[200px] text-center"
+                >
+                  View product
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <TopRated />
+    </>
   );
 };
 
