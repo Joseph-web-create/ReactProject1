@@ -17,14 +17,25 @@ export default function TopRated({ products }) {
         <h1 className="font-semibold text-xl text-center">
           Top Rated Products
         </h1>
-        <div className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scroll-track-gray-100" ref={scrollRef}>
+        <div
+          className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scroll-track-gray-100"
+          ref={scrollRef}
+        >
           {getTopratedProducts.map((items) => (
             <ProductCard key={items.id} item={items} />
           ))}
         </div>
         <div className="hidden md:block">
-          <i className="ri-arrow-left-s-line text-7xl absolute top-[35%] left-0"></i>
-          <i className="ri-arrow-right-s-line text-7xl absolute top-[35%] right-0"></i>
+          <i
+            className="ri-arrow-left-s-line text-7xl absolute top-[35%] left-0 cursor-pointer"
+            role="button"
+            onClick={() => scroll('left')}
+          ></i>
+          <i
+            className="ri-arrow-right-s-line text-7xl absolute top-[35%] right-0 cursor-pointer"
+            role="button"
+            onClick={() => scroll('right')}
+          ></i>
         </div>
       </div>
     </div>
