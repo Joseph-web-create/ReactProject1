@@ -54,20 +54,31 @@ export default function ProductDetails() {
               <button className="btn btn-primary btn-lg w-full mt-4">
                 Add To Cart
               </button>
-              <div className="">
+              <div>
                 <div className="divider"></div>
                 <h1 className="font-bold text-lg">Description</h1>
                 <p>{data?.description}</p>
                 <p className="mt-4">
-                  <span>Shipping Information</span>
-                  {" "}
-                  {data?.shippingInformation}
+                  <span>Shipping Information</span> {data?.shippingInformation}
                 </p>
                 <p className="mt-4">
-                  <span>Warranty Information</span>
-                  {" "}
-                  {data?.warrantyInformation}
+                  <span>Warranty Information</span> {data?.warrantyInformation}
                 </p>
+                <div className="divider"></div>
+
+                <h1>Reviews</h1>
+                <div>
+                  {data?.reviews?.map((review) => (
+                    <div className="mb-4">
+                      <div className="flex gap-4">
+                        <h1 className="font-bold">{review.reviewerName}</h1>
+                        <p>{review.reviewerEmail}</p>
+                        <p>{review.comment}</p>
+                        
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
