@@ -1,9 +1,17 @@
-@import url('https://fonts.cdnfonts.com/css/br-cobane');
+@import url("https://fonts.cdnfonts.com/css/br-cobane");
 @import "tailwindcss";
 @plugin "daisyui";
 
-*{
-     font-family: 'Br-Cobane',sans-serif;
-     scroll-behavior: smooth;
+* {
+  font-family: "Br-Cobane", sans-serif;
+  scroll-behavior: smooth;
 }
 
+.scrollbarHide::-webkit-scrollbar {
+     display: none;
+}
+
+.scrollbarHide {
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+}

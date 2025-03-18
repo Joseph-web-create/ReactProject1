@@ -11,7 +11,3 @@ export const getAuthUser = async (accessToken) => {
     },
   });
 };
-
-export const getAllProducts = async () => {
-  return await axiosInstance.get("/products");
-};

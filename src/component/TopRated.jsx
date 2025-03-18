@@ -18,7 +18,7 @@ export default function TopRated({ products }) {
           Top Rated Products
         </h1>
         <div
-          className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scroll-track-gray-100"
+          className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbarHide"
           ref={scrollRef}
         >
           {getTopratedProducts.map((items) => (

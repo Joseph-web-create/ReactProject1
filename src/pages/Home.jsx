@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../api/auth";
+import { getAllProducts } from "../api/products";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import { Link } from "react-router";
 import TopRated from "../component/TopRated";
@@ -42,7 +42,7 @@ const Home = () => {
         }
         
       } catch (error) {
-        console.log(error);
+        setError(error.response.data.message)
       } finally {
         setLoading(false);
       }
@@ -50,7 +50,10 @@ const Home = () => {
     fetchData();
   }, [lastSelected, lastTimeStamp, setLastSelected, setlastTimeStamp]);
 
-  console.log(data);
+  if (error) {
+    return (<p className="text-center mt-20 text-red-600">{error}</p>)
+    
+  }
   return (
     <>
       <div className="relative">
@@ -79,6 +82,7 @@ const Home = () => {
           </div>
         ))}
       </div>
+
       <TopRated products={products}/>
     </>
   );
