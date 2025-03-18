@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getaSingleProduct } from "../api/products";
+import Spinner from "../component/Spinner";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -24,5 +25,10 @@ export default function ProductDetails() {
     };
     getSingleProduct();
   }, [productId]);
-  return <div>ProductDetails</div>;
+  return (
+    <div className="container mx-auto py-6 px-4">
+      {error && <p className="text-center text-red-600">{error}</p>}
+      {loading ? <Spinner /> : <></>}
+    </div>
+  );
 }

@@ -24,7 +24,7 @@ export const AppRoutes = () => {
   const routes = [
     {
       element: (
-        <PublicRoutes isAuthenticate={user.isAuthenticated}>
+        <PublicRoutes isAuthenticate={userToken}>
           <AuthLayout />
         </PublicRoutes>
       ),
@@ -33,7 +33,7 @@ export const AppRoutes = () => {
     {
       path: "/",
       element: (
-        <PrivateRoutes isAuthenticate={user.isAuthenticated}>
+        <PrivateRoutes isAuthenticate={userToken}>
           <RootLayout />
         </PrivateRoutes>
       ),
