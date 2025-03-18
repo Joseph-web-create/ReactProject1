@@ -63,6 +63,7 @@ export default function AuthProvider({ children }) {
         setUserToken,
         setRefreshToken,
         handleLogout,
+        userToken
       }}
     >
       {children}

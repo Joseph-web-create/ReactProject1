@@ -11,3 +11,7 @@ export const getAllProducts = async () => {
 export const getAllProductsByCategory = async (categoryName) => {
   return await axiosInstance.get(`/products/category/${categoryName}`);
 };
+
+export const getaSingleProduct = async (productId) => {
+  return await axiosInstance.get(`/products/${productId}`);
+};

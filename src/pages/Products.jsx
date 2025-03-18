@@ -17,10 +17,8 @@ export default function Products() {
       setLoading(true);
       try {
         const res = await getAllProductsByCategory(category);
-        console.log(res);
         setData(res.data.products);
       } catch (error) {
-        console.log(error);
         setError(error.response.data.message);
       } finally {
         setLoading(false);
@@ -38,7 +36,7 @@ export default function Products() {
       ) : (
         <>
           {data?.length > 0 ? (
-            <div className="md:grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 md:grid-cols-4 gap-4">
               {data.map((item) => (
                 <ProductCard key={item.id} item={item}/>
               ))}

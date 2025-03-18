@@ -7,9 +7,10 @@ import { useAuth } from "../store";
 import Spinner from "../component/Spinner";
 import { PrivateRoutes, PublicRoutes } from "./ProtectedRoutes";
 import Products from "../pages/Products";
+import ProductDetails from "../pages/ProductDetails";
 
 export const AppRoutes = () => {
-  const { isCheckingAuth, user } = useAuth();
+  const { isCheckingAuth, user , userToken} = useAuth();
   console.log(isCheckingAuth);
 
   if (isCheckingAuth) {
@@ -44,6 +45,10 @@ export const AppRoutes = () => {
         {
           path: "products/:category", //useParams
           element: <Products />,
+        },
+        {
+          path: "product/:productId",
+          element: <ProductDetails />,
         },
       ],
     },
