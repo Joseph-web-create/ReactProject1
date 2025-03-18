@@ -84,6 +84,7 @@ const Home = () => {
       </div>
 
       <TopRated products={products}/>
+      
     </>
   );
 };

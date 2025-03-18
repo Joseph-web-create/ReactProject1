@@ -50,7 +50,7 @@ export const Categories = () => {
                         isActive ? "text-zinc-700 font-bold" : ""
                       }`
                     }
-                    to={`/products/${item}}`}
+                    to={`/products/${item}`}
                   >
                     {item}
                   </NavLink>

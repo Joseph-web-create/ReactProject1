@@ -6,11 +6,12 @@ import RootLayout from "../layout/RootLayout";
 import { useAuth } from "../store";
 import Spinner from "../component/Spinner";
 import { PrivateRoutes, PublicRoutes } from "./ProtectedRoutes";
+import Products from "../pages/Products";
 
 export const AppRoutes = () => {
   const { isCheckingAuth, user } = useAuth();
   console.log(isCheckingAuth);
-  
+
   if (isCheckingAuth) {
     return (
       <>
@@ -39,6 +40,10 @@ export const AppRoutes = () => {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "products/:category", //useParams
+          element: <Products />,
         },
       ],
     },

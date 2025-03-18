@@ -7,3 +7,7 @@ export const getProductsCategories = async () => {
 export const getAllProducts = async () => {
   return await axiosInstance.get("/products");
 };
+
+export const getAllProductsByCategory = async (categoryName) => {
+  return await axiosInstance.get(`/products/category/${categoryName}`);
+};
