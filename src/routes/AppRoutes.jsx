@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import { AuthLayout } from "../layout/AuthLayout";
 import Home from "../pages/Home";
 import { Login } from "../pages/Login";
@@ -10,8 +10,8 @@ import Products from "../pages/Products";
 import ProductDetails from "../pages/ProductDetails";
 
 export const AppRoutes = () => {
-  const { isCheckingAuth, user , userToken} = useAuth();
-  console.log(isCheckingAuth);
+  const { isCheckingAuth, user, userToken } = useAuth();
+  console.log(user);
 
   if (isCheckingAuth) {
     return (
@@ -23,19 +23,15 @@ export const AppRoutes = () => {
 
   const routes = [
     {
-      element: (
-        <PublicRoutes isAuthenticate={userToken}>
-          <AuthLayout />
-        </PublicRoutes>
-      ),
+      element: user.isAuthenticated ? <AuthLayout /> : <Navigate to="/login" />,
       children: [{ path: "login", element: <Login /> }],
     },
     {
       path: "/",
       element: (
-        <PrivateRoutes isAuthenticate={userToken}>
+        <>
           <RootLayout />
-        </PrivateRoutes>
+        </>
       ),
       children: [
         {

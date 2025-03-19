@@ -17,8 +17,8 @@ export default function AuthProvider({ children }) {
   // const accessToken = JSON.parse(localStorage.getItem("userAccessToken"));
 
   useEffect(() => {
+    if (!userToken) return;
     const getAuth = async () => {
-      if (!userToken) return;
       try {
         setIsCheckingAuth(true);
         const res = await getAuthUser(userToken);
@@ -43,6 +43,7 @@ export default function AuthProvider({ children }) {
   }, [userToken, setIsCheckingAuth]);
 
   const handleLogout = () => {
+    localStorage.removeItem("userAccessToken");
     setUserToken(null);
     setRefreshToken(null);
     setUser({
@@ -63,7 +64,7 @@ export default function AuthProvider({ children }) {
         setUserToken,
         setRefreshToken,
         handleLogout,
-        userToken
+        userToken,
       }}
     >
       {children}
