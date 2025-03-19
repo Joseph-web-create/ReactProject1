@@ -67,7 +67,7 @@ export default function Nav() {
           </button>
         </div>
       </div>
-      {showSeachBox && <SearchBox />}
+      {showSeachBox && <SearchBox handleSearchBox={handleSearchBox} />}
     </div>
   );
 }
