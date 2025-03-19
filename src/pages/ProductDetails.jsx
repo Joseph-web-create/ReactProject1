@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { getaSingleProduct, getAllProducts } from "../api/products";
 import Spinner from "../component/Spinner";
 import ProductCard from "../component/ProductCard";
+import useScroll from "../Hooks/UseScroll";
 
 export default function ProductDetails() {
   const { productId } = useParams();
@@ -10,19 +11,18 @@ export default function ProductDetails() {
   const [recommended, setRecommended] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { scroll, scrollRef } = useScroll();
 
   useEffect(() => {
     const getSingleProduct = async () => {
       setLoading(true);
       try {
-        // const res = await getaSingleProduct(productId);
-        // const res1 = await getAllProducts();
-        // setRecommended(res1.data.products);
-        // setData(res.data);
         const [res, resProducts] = await Promise.all([
           getaSingleProduct(productId),
           getAllProducts(),
         ]);
+        setData(res.data);
+        setRecommended(resProducts.data.products);
       } catch (error) {
         setError(error.response.data.message);
       } finally {
@@ -102,10 +102,27 @@ export default function ProductDetails() {
       )}
       <div className="mt-10">
         <h1 className="font-bold text-2xl">You may also like</h1>
-        <div className="mt-6 flex gap-6 overflow-x-auto">
-          {getRecommendedProducts.map((item) => (
-            <ProductCard key={item.id} item={item} />
-          ))}
+        <div className="relative">
+          <div
+            className="mt-6 max-w-[90%] mx-auto flex gap-6 overflow-x-auto scrollbarHide"
+            ref={scrollRef}
+          >
+            {getRecommendedProducts.map((item) => (
+              <ProductCard key={item.id} item={item} />
+            ))}
+          </div>
+          <div className="hidden lg:block">
+            <i
+              className="ri-arrow-left-s-line text-7xl absolute top-[35%] left-0 cursor-pointer"
+              role="button"
+              onClick={() => scroll("left")}
+            ></i>
+            <i
+              className="ri-arrow-right-s-line text-7xl absolute top-[35%] right-0 cursor-pointer"
+              role="button"
+              onClick={() => scroll("right")}
+            ></i>
+          </div>
         </div>
       </div>
     </div>

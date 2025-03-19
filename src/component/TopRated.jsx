@@ -1,16 +1,11 @@
 import ProductCard from "./ProductCard";
-import { useRef } from "react";
+import useScroll from "../Hooks/UseScroll";
 
 export default function TopRated({ products }) {
-  const scrollRef = useRef();
   const getTopratedProducts = products?.filter((item) => item.rating > 4);
 
-  const scroll = (direction) => {
-    const { current } = scrollRef;
-    direction === "left"
-      ? (current.scrollLeft -= 600)
-      : (current.scrollLeft += 600);
-  };
+  const {scroll,scrollRef} = useScroll()
+
   return (
     <div className="bg-gray-200  py-6 px-4">
       <div className="container mx-auto mt-16 relative">
