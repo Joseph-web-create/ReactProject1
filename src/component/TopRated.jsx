@@ -13,14 +13,14 @@ export default function TopRated({ products }) {
           Top Rated Products
         </h1>
         <div
-          className="mt-10 max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbarHide"
+          className="mt-10 lg:max-w-[90%] mx-auto flex gap-6 overflow-x-auto pb-4 scrollbarHide"
           ref={scrollRef}
         >
           {getTopratedProducts.map((items) => (
             <ProductCard key={items.id} item={items} />
           ))}
         </div>
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <i
             className="ri-arrow-left-s-line text-7xl absolute top-[35%] left-0 cursor-pointer"
             role="button"

@@ -104,7 +104,7 @@ export default function ProductDetails() {
         <h1 className="font-bold text-2xl">You may also like</h1>
         <div className="relative">
           <div
-            className="mt-6 max-w-[90%] mx-auto flex gap-6 overflow-x-auto scrollbarHide"
+            className="mt-6 lg:max-w-[90%] mx-auto flex gap-6 overflow-x-auto scrollbarHide"
             ref={scrollRef}
           >
             {getRecommendedProducts.map((item) => (

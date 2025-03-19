@@ -1,11 +1,18 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../store";
+import { useState } from "react";
+import SearchBox from "./SearchBox";
 
 export default function Nav() {
-     const {user, handleLogout} = useAuth()
+  const { user, handleLogout } = useAuth();
+  const [showSeachBox, setShowSearchBox] = useState(false);
+
+  const handleSearchBox = () => {
+    setShowSearchBox((prev) => !prev);
+  };
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between items-center">
+      <div className="flex  justify-between items-center">
         <NavLink to="/" className="font-bold text-3xl">
           DUMMY STORE
         </NavLink>
@@ -53,14 +60,14 @@ export default function Nav() {
               CART
             </button>
           </NavLink>
-          <NavLink to="/">
-            <button className="btn btn-ghost">
-              <i className="ri-search-line text-xl"></i>
-              search
-            </button>
-          </NavLink>
+
+          <button className="btn btn-ghost" onClick={handleSearchBox}>
+            <i className="ri-search-line text-xl"></i>
+            search
+          </button>
         </div>
       </div>
+      {showSeachBox && <SearchBox />}
     </div>
   );
 }
