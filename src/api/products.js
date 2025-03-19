@@ -15,3 +15,7 @@ export const getAllProductsByCategory = async (categoryName) => {
 export const getaSingleProduct = async (productId) => {
   return await axiosInstance.get(`/products/${productId}`);
 };
+
+export const searchProducts = async (searchQuery) => {
+  return await axiosInstance.get(`/products/search?q=${searchQuery}`);
+};

@@ -10,6 +10,7 @@ export default function SearchBox({ handleSearchBox }) {
     if (seachQuery) {
       navigate(`/search?query=${seachQuery}`);
     }
+    
   };
   return (
     <div className="mt-4 relative">
@@ -26,6 +27,7 @@ export default function SearchBox({ handleSearchBox }) {
       <i
         class="ri-close-large-line absolute right-4 top-[25%] cursor-pointer"
         role="button"
+        onClick={handleSearchBox}
       ></i>
     </div>
   );

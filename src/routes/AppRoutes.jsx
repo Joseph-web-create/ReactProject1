@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { AuthLayout } from "../layout/AuthLayout";
 import Home from "../pages/Home";
 import { Login } from "../pages/Login";
@@ -8,10 +8,11 @@ import Spinner from "../component/Spinner";
 import { PrivateRoutes, PublicRoutes } from "./ProtectedRoutes";
 import Products from "../pages/Products";
 import ProductDetails from "../pages/ProductDetails";
+import Search from "../pages/Search";
 
 export const AppRoutes = () => {
   const { isCheckingAuth, user, userToken } = useAuth();
-  console.log(user);
+  console.log(userToken);
 
   if (isCheckingAuth) {
     return (
@@ -23,7 +24,7 @@ export const AppRoutes = () => {
 
   const routes = [
     {
-      element: user.isAuthenticated ? <AuthLayout /> : <Navigate to="/login" />,
+      element: <AuthLayout />,
       children: [{ path: "login", element: <Login /> }],
     },
     {
@@ -45,6 +46,10 @@ export const AppRoutes = () => {
         {
           path: "product/:productId",
           element: <ProductDetails />,
+        },
+        {
+          path: "search",
+          element: <Search />,
         },
       ],
     },

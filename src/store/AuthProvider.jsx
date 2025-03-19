@@ -30,6 +30,7 @@ export default function AuthProvider({ children }) {
           });
         }
       } catch (error) {
+        localStorage.removeItem("userAccessToken");
         setUser({
           isError: error.response.data.message,
           isAuthenticated: false,
